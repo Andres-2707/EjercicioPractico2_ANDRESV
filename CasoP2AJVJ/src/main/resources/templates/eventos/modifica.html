@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body>
+    <header th:replace="~{general/fragmentos :: header}"></header>
+
+    <main class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="mb-0">
+                            <i class="fa-solid fa-calendar-plus"></i> 
+                            <span th:text="${evento.id != null ? 'Modificar Evento' : 'Nuevo Evento'}"></span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        
+                        <form th:action="@{/eventos/guardar}" th:object="${evento}" method="POST" class="needs-validation">
+                            
+                            <input type="hidden" th:field="*{id}"/>
+
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label fw-bold">Nombre del Evento:</label>
+                                <input type="text" class="form-control" th:field="*{nombre}" id="nombre" required placeholder="Ej. Conferencia Tech 2026"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label fw-bold">Descripción:</label>
+                                <textarea class="form-control" th:field="*{descripcion}" id="descripcion" rows="3" required placeholder="Detalles del evento..."></textarea>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="fecha" class="form-label fw-bold">Fecha del Evento:</label>
+                                    <input type="date" class="form-control" th:field="*{fecha}" id="fecha" required/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="capacidad" class="form-label fw-bold">Capacidad Máxima:</label>
+                                    <input type="number" class="form-control" th:field="*{capacidad}" id="capacidad" min="1" required/>
+                                </div>
+                            </div>
+
+                            <div class="mb-4 form-check form-switch">
+                                <input class="form-check-input" type="checkbox" th:field="*{activo}" id="activo"/>
+                                <label class="form-check-label fw-bold" for="activo">Evento Activo (Visible para el público)</label>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/eventos/listado}" class="btn btn-secondary">
+                                    <i class="fa-solid fa-arrow-left"></i> Regresar
+                                </a>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa-solid fa-floppy-disk"></i> Guardar Evento
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{general/fragmentos :: footer}"></footer>
+</body>
+</html>

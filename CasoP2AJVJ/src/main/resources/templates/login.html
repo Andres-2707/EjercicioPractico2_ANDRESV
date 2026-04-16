@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body class="bg-light">
+    
+    <main class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="card shadow-lg border-0 rounded-lg mt-5" style="width: 25rem;">
+            <div class="card-header text-center bg-primary text-white">
+                <h3 class="font-weight-light my-2">
+                    <i class="fa-solid fa-calendar-check"></i> Eventos AJVJ
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                
+                <div th:if="${param.error}" class="alert alert-danger text-center shadow-sm" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Usuario o contraseña incorrectos.
+                </div>
+                
+                <div th:if="${param.logout}" class="alert alert-success text-center shadow-sm" role="alert">
+                    <i class="fa-solid fa-circle-check"></i> Ha cerrado sesión correctamente.
+                </div>
+
+                <form method="POST" th:action="@{/login}">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="username" name="username" type="email" placeholder="nombre@ejemplo.com" required autofocus/>
+                        <label for="username"><i class="fa-solid fa-envelope"></i> Correo Electrónico</label>
+                    </div>
+                    
+                    <div class="form-floating mb-4">
+                        <input class="form-control" id="password" name="password" type="password" placeholder="Contraseña" required/>
+                        <label for="password"><i class="fa-solid fa-lock"></i> Contraseña</label>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-lg" type="submit">
+                            Iniciar Sesión <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center py-3">
+                <div class="small">
+                    <a th:href="@{/}"><i class="fa-solid fa-house"></i> Volver a la página principal</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

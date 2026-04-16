@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body>
+    <header th:replace="~{general/fragmentos :: header}"></header>
+
+    <main class="container mt-5">
+        <div class="p-5 mb-4 bg-light rounded-3 shadow-sm border">
+            <div class="container-fluid py-5 text-center">
+                <h1 class="display-5 fw-bold text-primary">
+                    <i class="fa-solid fa-calendar-check"></i> Plataforma de Eventos
+                </h1>
+                <p class="col-md-8 mx-auto fs-4 text-muted mt-3">
+                    Descubre, organiza y participa en las mejores actividades. Un sistema centralizado para el control total de tus eventos y reservas.
+                </p>
+                
+                <div class="mt-4">
+                    <a th:href="@{/eventos/listado}" class="btn btn-primary btn-lg px-4 me-md-2 shadow-sm">
+                        <i class="fa-solid fa-list"></i> Explorar Eventos
+                    </a>
+                    <span sec:authorize="!isAuthenticated()">
+                        <a th:href="@{/login}" class="btn btn-outline-secondary btn-lg px-4 shadow-sm">
+                            <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-md-stretch text-center mt-4 mb-5">
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3 shadow-sm">
+                    <h2><i class="fa-solid fa-calendar-plus"></i> ¿Eres Organizador?</h2>
+                    <p>Gestiona la capacidad, establece fechas y mantén informados a los clientes sobre tus próximas actividades y conferencias.</p>
+                    <a th:href="@{/eventos/nuevo}" class="btn btn-outline-light mt-3" 
+                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_ORGANIZADOR')">
+                        Crear Nuevo Evento
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-white border rounded-3 shadow-sm">
+                    <h2 class="text-dark"><i class="fa-solid fa-users-gear"></i> Administración</h2>
+                    <p class="text-muted">Controla los accesos al sistema, audita roles y asegura el correcto funcionamiento de toda la plataforma web.</p>
+                    <a th:href="@{/usuarios/listado}" class="btn btn-outline-dark mt-3" 
+                       sec:authorize="hasRole('ROLE_ADMIN')">
+                        Gestionar Usuarios
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{general/fragmentos :: footer}"></footer>
+</body>
+</html>
