@@ -48,6 +48,12 @@
                                 <i class="fa-solid fa-users-gear"></i> Usuarios
                             </a>
                         </li>
+
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="nav-link" th:href="@{/roles/listado}">
+                                <i class="fa-solid fa-tags"></i> Roles
+                            </a>
+                        </li>
                     </ul>
                     
                     <ul class="navbar-nav">
